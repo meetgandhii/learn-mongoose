@@ -53,6 +53,16 @@ GenreSchema.statics.getGenreIdByName = async function (name: string): Promise<mo
 }
 
 /**
+ * Static method to retrieve all genre names sorted alphabetically.
+ * @returns {Promise<string[]>} An array of genre names sorted by name.
+ */
+GenreSchema.statics.getAllGenresSorted = async function (): Promise<string[]> {
+  const genres = await this.find().sort({ name: 1 });
+  return genres.map((genre: IGenre) => genre.name);
+};
+
+
+/**
  * Compile the schema into a model and export it.
  * The model is instantiated with the IGenre interface and 
  * the IGenreModel interface. This is to ensure that the model 
